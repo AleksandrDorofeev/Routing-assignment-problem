@@ -1,11 +1,23 @@
 import React, { Component } from 'react';
 
 class Course extends Component {
-    render () {
+    state = {
+        parse: ''
+    }
+
+    componentDidMount() {
+        console.log(this.props)
+        let parseQuery = new URLSearchParams(this.props.location.search);
+        for(let string of parseQuery) {
+            this.setState({parse: string[1]})
+        }
+    }
+
+    render() {
         return (
             <div>
-                <h1>_COURSE_TITLE_</h1>
-                <p>You selected the Course with ID: _ID_</p>
+                <h1>{this.state.parse}</h1>
+                <p>You selected the Course with ID: {this.props.match.params.id}</p>
             </div>
         );
     }
