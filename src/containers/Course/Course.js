@@ -6,10 +6,20 @@ class Course extends Component {
     }
 
     componentDidMount() {
+        this.parseQueryHandler()
+    }
+
+    componentDidUpdate() {
+        this.parseQueryHandler()
+    }
+
+    parseQueryHandler = () => {
         console.log(this.props)
         let parseQuery = new URLSearchParams(this.props.location.search);
-        for(let string of parseQuery) {
-            this.setState({parse: string[1]})
+        for(let string of parseQuery.entries()) {
+            if(this.state.parse !== string[1]) {
+                this.setState({parse: string[1]})
+            }
         }
     }
 
